@@ -12,8 +12,8 @@ const highlights = [
 
 export function About() {
   return (
-    <Section id="about" eyebrow="About" title="Building things people actually use.">
-      <div className="grid gap-10 lg:grid-cols-5">
+    <Section id="about" index="01" eyebrow="About" title="Building things people actually use.">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-5 lg:gap-14">
         <Reveal className="space-y-5 text-base leading-relaxed text-muted sm:text-lg lg:col-span-3">
           <p>
             I&apos;m <strong className="font-semibold text-fg">{profile.name}</strong>, a fourth-year BS Information
@@ -30,10 +30,10 @@ export function About() {
           </p>
         </Reveal>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:col-span-2">
+        <div className="grid gap-4 xs:grid-cols-2 lg:col-span-2">
           {highlights.map((h, i) => (
             <Reveal key={h.title} delay={i * 80}>
-              <div className="card card-hover h-full p-5">
+              <div className="card card-hover spot h-full p-5">
                 <h.icon size={22} className="text-accent" aria-hidden />
                 <h3 className="mt-3 font-medium">{h.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted">{h.text}</p>

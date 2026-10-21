@@ -13,17 +13,18 @@ export function Contact() {
   return (
     <Section
       id="contact"
+      index="05"
       eyebrow="Contact"
       title="Let's build something together."
       intro="I'm looking for opportunities to grow as a full-stack developer. Send me a message — I read everything."
     >
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-3">
         {items.map((it, i) => {
           const inner = (
             <>
               <it.icon size={22} className="text-accent" aria-hidden />
               <p className="mt-4 text-sm text-muted">{it.label}</p>
-              <p className="mt-1 flex items-center gap-1.5 break-all font-medium">
+              <p className="mt-1 flex items-center justify-between gap-2 font-medium [overflow-wrap:anywhere]">
                 {it.value}
                 {it.href && <ArrowUpRight size={14} className="shrink-0 text-muted" aria-hidden />}
               </p>
@@ -36,7 +37,7 @@ export function Contact() {
                   href={it.href}
                   target={it.href.startsWith("http") ? "_blank" : undefined}
                   rel={it.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="card card-hover block h-full p-6"
+                  className="card card-hover spot block h-full p-6"
                 >
                   {inner}
                 </a>

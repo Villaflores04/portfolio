@@ -1,6 +1,7 @@
 import { ArrowUpRight, Check, Github } from "lucide-react";
 import { project } from "@/data/profile";
 import { FeedbackDemo } from "./feedback-demo";
+import { ProjectGallery } from "./project-gallery";
 import { Reveal } from "./reveal";
 import { Section } from "./section";
 
@@ -12,7 +13,7 @@ const methodStyle: Record<string, string> = {
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <Reveal>
-      <div className="card h-full p-6 sm:p-7">
+      <div className="card spot h-full p-6 sm:p-7">
         <h3 className="text-lg font-semibold">{title}</h3>
         <div className="mt-4">{children}</div>
       </div>
@@ -30,6 +31,7 @@ export function Project() {
   return (
     <Section
       id="project"
+      index="03"
       eyebrow="Featured project"
       title={`${project.title} — ${project.subtitle}`}
       intro={project.summary}
@@ -40,7 +42,7 @@ export function Project() {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-surface px-5 text-sm font-medium transition hover:border-accent"
+            className="btn btn-ghost !min-h-11"
           >
             <Github size={16} aria-hidden /> Source on GitHub <ArrowUpRight size={14} aria-hidden />
           </a>
@@ -49,7 +51,7 @@ export function Project() {
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-5 text-sm font-medium text-white"
+              className="btn btn-primary !min-h-11"
             >
               Live demo <ArrowUpRight size={14} aria-hidden />
             </a>
@@ -68,11 +70,15 @@ export function Project() {
         </ul>
       </Reveal>
 
-      <Reveal className="mt-10">
+      <Reveal className="mt-12">
+        <ProjectGallery />
+      </Reveal>
+
+      <Reveal className="mt-16 sm:mt-20">
         <FeedbackDemo />
       </Reveal>
 
-      <div className="mt-8 grid gap-5 lg:grid-cols-2">
+      <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
         <Block title="Key features">
           <ul className="space-y-3">
             {project.features.map((f) => (
@@ -140,7 +146,7 @@ export function Project() {
       </div>
 
       <Reveal className="mt-5">
-        <div className="card p-6 sm:p-7">
+        <div className="card spot p-6 sm:p-7">
           <h3 className="text-lg font-semibold">What I&apos;d improve next</h3>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {project.next.map((n) => (
