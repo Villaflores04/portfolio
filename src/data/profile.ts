@@ -9,6 +9,7 @@ export const profile = {
   github: "https://github.com/Villaflores04",
   linkedin: null as string | null, // "Coming soon"
   availability: "Open to internships, junior roles and freelance work",
+  availabilityShort: "Open to internships & freelance",
 };
 
 export const skills = [
@@ -58,7 +59,7 @@ export const project = {
   summary:
     "A public feedback desk for the Municipality of Daet, Camarines Norte. Visitors leave one of four faces plus an optional note and photo — no account needed — while municipal officers moderate and analyse feedback from a protected desk.",
   github: "https://github.com/Villaflores04/daet_feedback",
-  live: null as string | null,
+  live: "https://daetfeedback.vercel.app/" as string | null,
   stack: ["Next.js 15", "React 19", "TypeScript", "TailwindCSS 4", "Zustand", "Supabase (PostgreSQL + Storage)", "Vercel"],
   features: [
     "Four-face emoji rating (Wow · Happy · Okay · Sad) with optional note and photo",

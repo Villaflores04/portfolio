@@ -79,7 +79,7 @@ export function HeroLandscape() {
 
       {/* sun / moon */}
       <Layer depth={0.3} pointer={9} className="top-0 h-full">
-        <div className="celestial absolute right-[9%] top-[5.1rem] sm:right-[12%] sm:top-[6.2rem] lg:right-[14%] lg:top-[6.6rem]">
+        <div className="celestial absolute right-[8%] top-[5.25rem] sm:right-[12%] sm:top-[6.2rem] lg:right-[14%] lg:top-[6.6rem]">
           <span className="celestial-glow" />
           <span className="celestial-body" />
         </div>

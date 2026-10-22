@@ -40,7 +40,7 @@ npm run dev        # http://localhost:3000
 
 **Deploy:** import the repo on Vercel (Framework Preset: Next.js). Optionally set `NEXT_PUBLIC_SITE_URL` to the deployed URL for correct social-preview metadata.
 
-**Edit content:** everything (bio, skills, education, project details, links) lives in [`src/data/profile.ts`](src/data/profile.ts). Set `linkedin` and the project's `live` URL there when they are ready.
+**Edit content:** everything (bio, skills, education, project details, links) lives in [`src/data/profile.ts`](src/data/profile.ts). Set `linkedin` there when it is ready.
 
 ## Performance
 
@@ -64,7 +64,7 @@ Measured in headless Chromium (software rendering, so absolute numbers are pessi
 
 ## Featured project: DAET Pulse
 
-Tourism feedback system for the Municipality of Daet, Camarines Norte. Source: https://github.com/Villaflores04/daet_feedback. Built with Next.js, React, TypeScript, TailwindCSS, Zustand and Supabase (PostgreSQL + Storage). Screenshots in [`public/projects`](public/projects) were captured from a local production build against a fresh database (the six seeded places, no visitor feedback).
+Tourism feedback system for the Municipality of Daet, Camarines Norte. Live demo: https://daetfeedback.vercel.app/ · Source: https://github.com/Villaflores04/daet_feedback. Built with Next.js, React, TypeScript, TailwindCSS, Zustand and Supabase (PostgreSQL + Storage). Screenshots in [`public/projects`](public/projects) were captured from a local production build against a fresh database (the six seeded places, no visitor feedback).
 
 | Landing | Feedback form | Places |
 |---|---|---|
@@ -92,7 +92,6 @@ tests/                    Vitest unit tests
 
 ## Limitations
 
-- The DAET Pulse live demo is not yet published; its source is linked.
 - Cursor parallax is desktop-only; touch devices get scroll parallax.
 - Verified in headless Chromium only, not on physical devices or other browsers.
 

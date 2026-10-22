@@ -294,7 +294,7 @@ body {
 }
 
 .celestial {
-  width: clamp(64px, 11vw, 132px);
+  width: clamp(54px, 11vw, 132px);
   aspect-ratio: 1;
 }
 .celestial-body {

@@ -36,29 +36,29 @@ export function Project() {
       intro={project.summary}
     >
       <Reveal>
-        <div className="flex flex-wrap items-center gap-3">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-ghost !min-h-11"
-          >
-            <Github size={16} aria-hidden /> Source on GitHub <ArrowUpRight size={14} aria-hidden />
-          </a>
+        <div className="grid grid-cols-1 gap-3 sm:flex sm:flex-wrap sm:items-center">
           {project.live ? (
             <a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary !min-h-11"
+              className="btn btn-primary w-full !min-h-12 sm:w-auto"
             >
-              Live demo <ArrowUpRight size={14} aria-hidden />
+              Live demo <ArrowUpRight size={16} aria-hidden />
             </a>
           ) : (
-            <span className="inline-flex min-h-11 items-center rounded-full border border-dashed border-line px-5 text-sm text-muted">
+            <span className="inline-flex min-h-12 items-center justify-center rounded-full border border-dashed border-line px-5 text-sm text-muted">
               Live demo coming soon
             </span>
           )}
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-ghost w-full !min-h-12 sm:w-auto"
+          >
+            <Github size={16} aria-hidden /> Source on GitHub <ArrowUpRight size={14} aria-hidden />
+          </a>
         </div>
         <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tech stack">
           {project.stack.map((t) => (
