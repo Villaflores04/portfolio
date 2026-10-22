@@ -165,8 +165,14 @@ body {
   box-shadow: var(--shadow-card);
 }
 .glass-blur {
-  -webkit-backdrop-filter: blur(16px) saturate(1.3);
-  backdrop-filter: blur(16px) saturate(1.3);
+  background: color-mix(in oklab, var(--surface) 94%, transparent);
+}
+@media (min-width: 1024px) {
+  .glass-blur {
+    background: color-mix(in oklab, var(--surface) 78%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    backdrop-filter: blur(16px) saturate(1.3);
+  }
 }
 
 /* cursor spotlight (set by <Spotlight/>) */
@@ -545,6 +551,40 @@ body {
   50% {
     opacity: 0;
   }
+}
+
+/* ───────────── lite mode ─────────────
+   Added on <html> by <PerfGuard/> when the device drops frames (or Save-Data is on): static scene, no
+   ambient fields, grain, twinkle, drift or marquee. The page looks the same, it just stops moving. */
+@media (max-width: 767px) {
+  .grain {
+    display: none;
+  }
+}
+.lite .plx,
+.lite .ambient,
+.lite .ghost-word,
+.lite .star-group,
+.lite .cloud,
+.lite .mist,
+.lite .celestial-glow,
+.lite .marquee {
+  animation: none !important;
+}
+.lite .plx {
+  translate: none;
+  transform: none !important;
+}
+.lite .grain,
+.lite .ambient {
+  display: none;
+}
+.lite .glass-blur {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.lite .marquee-wrap {
+  overflow-x: auto;
 }
 
 /* ───────────── reduced motion ───────────── */

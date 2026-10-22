@@ -9,7 +9,7 @@ A premium, responsive developer portfolio built with **Next.js 15, React 19, Typ
 ## What it does
 
 - Presents my profile, skills, education and featured project (DAET Pulse) as a fast single page.
-- Opens with a **9-layer parallax landscape** (sky, stars, sun/moon, clouds, three mountain ranges, mist, pines, foreground ridge). Layers move at different rates on scroll and respond to the cursor on desktop.
+- Opens with a **multi-layer parallax landscape** (sky with stars, sun/moon and clouds; three mountain ranges; mist and pines; foreground ridge). Layers move at different rates on scroll and respond to the cursor on desktop.
 - **Light and dark mode** with different scenes: sun and lavender peaks by day, moon, stars and indigo peaks by night. Follows the OS until you choose, then remembers your choice, with no flash on load.
 - Shows **DAET Pulse screenshots** in a tabbed browser-and-phone gallery, plus its features, architecture, API endpoints, challenges and next steps.
 - Responsive from 320px phones to wide desktops: floating pill navigation, full-screen mobile menu, active-section highlighting, scroll-progress bar and back-to-top.
@@ -49,6 +49,8 @@ The parallax is built to stay smooth on modest hardware:
 - **Scroll motion runs on the compositor.** Where the browser supports CSS scroll-driven animations (`animation-timeline: scroll()`, Chromium and recent Safari), the hero layers, ambient colour fields, section numerals and progress bar are animated entirely in CSS with no JavaScript on scroll. Other browsers fall back to a single `requestAnimationFrame` loop with cached measurements.
 - **Cursor and scroll never fight.** Scroll uses the CSS `translate` property while the cursor uses `transform`, so they compose.
 - **No expensive filters on moving content.** Backdrop blur is used only on the fixed nav and mobile menu; clouds and mist use gradients instead of animated blur; the star field is three box-shadow groups instead of ~110 animated elements.
+- **Adaptive lite mode.** `PerfGuard` samples frame times during the first scroll. On a device that drops frames (or with Save-Data on) it freezes the parallax, ambient fields, grain and marquee so scrolling stays smooth; fast devices never notice.
+- **Fewer layers.** Sky objects share one layer, mist rides with the hills, and phones skip the grain overlay and nav blur.
 - Work stops while the hero is off screen, and all motion is disabled under `prefers-reduced-motion`.
 
 Measured in headless Chromium (software rendering, so absolute numbers are pessimistic), scrolling through the hero improved from about 7 fps with 67 janky frames to about 53 fps with 4, and 13 fps to 50 fps under 4x CPU throttling.

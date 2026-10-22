@@ -70,23 +70,17 @@ export function HeroLandscape() {
       {/* sky */}
       <div className="sky absolute inset-0" />
 
-      {/* stars (dark mode only; three twinkling groups) */}
-      <Layer depth={0.34} pointer={4} className="stars-layer top-[-60svh] h-[200svh]">
-        <i className="star-group sg-a" style={{ boxShadow: stars.a }} />
-        <i className="star-group sg-b" style={{ boxShadow: stars.b }} />
-        <i className="star-group sg-c" style={{ boxShadow: stars.c }} />
-      </Layer>
-
-      {/* sun / moon */}
+      {/* sky objects: stars, sun/moon and clouds share one layer (fewer layers to composite) */}
       <Layer depth={0.3} pointer={9} className="top-0 h-full">
+        <div className="stars-layer absolute inset-x-0 top-0 h-full">
+          <i className="star-group sg-a" style={{ boxShadow: stars.a }} />
+          <i className="star-group sg-b" style={{ boxShadow: stars.b }} />
+          <i className="star-group sg-c" style={{ boxShadow: stars.c }} />
+        </div>
         <div className="celestial absolute right-[8%] top-[5.25rem] sm:right-[12%] sm:top-[6.2rem] lg:right-[14%] lg:top-[6.6rem]">
           <span className="celestial-glow" />
           <span className="celestial-body" />
         </div>
-      </Layer>
-
-      {/* clouds */}
-      <Layer depth={0.27} pointer={12} className="top-0 h-full">
         <div className="cloud cloud-a" />
         <div className="cloud cloud-b" />
       </Layer>
@@ -101,13 +95,9 @@ export function HeroLandscape() {
         <Ridge id="g-mid" d={ridges.mid} from="--m-mid" to="--m-mid-b" />
       </Layer>
 
-      {/* mist */}
-      <Layer depth={0.1} pointer={18} className="bottom-0 h-[52%]">
-        <div className="mist" />
-      </Layer>
-
       {/* near hills + pines */}
       <Layer depth={0.06} pointer={22} className="bottom-0 h-[54%]">
+        <div className="mist" />
         <Ridge id="g-near" d={ridges.nearHills} from="--m-near" to="--m-near-b" />
         <Ridge id="g-pines" d={ridges.nearPines} from="--m-pine" to="--m-pine-b" />
       </Layer>
