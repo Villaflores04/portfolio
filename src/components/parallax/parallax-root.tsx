@@ -3,16 +3,14 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Drives a stack of layers with scroll + pointer parallax.
+ * Pointer parallax (desktop) plus a scroll fallback for browsers without CSS scroll-driven animations.
  *
- * Children carry data attributes:
- *   data-depth    scroll factor. Positive layers lag behind the page (feel far away),
- *                 negative layers move faster than the page (feel close).
- *   data-pointer  max pointer offset in px (desktop / fine pointers only).
- *   data-fade     marks the content wrapper that should fade as the hero scrolls away.
+ * Where `animation-timeline: scroll()` exists (Chromium, Safari 26+), the scroll motion runs entirely on the
+ * compositor via CSS (`.plx` in globals.css), so scrolling never touches the main thread. This component then only
+ * handles the cursor. In other browsers (e.g. Firefox) it drives the scroll motion itself.
  *
- * Nothing re-renders: transforms are written straight to the DOM inside one rAF loop,
- * which only runs while the scene is on screen. Reduced-motion users get a static scene.
+ * Performance rules: no layout reads on scroll or pointer move (sizes are cached), numbers parsed once, one rAF loop
+ * that only runs while the hero is on screen and still settling.
  */
 export function ParallaxRoot({
   children,
@@ -30,15 +28,17 @@ export function ParallaxRoot({
   useEffect(() => {
     const el = root.current;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduce.matches) return;
-
+    const nativeScroll = typeof CSS !== "undefined" && CSS.supports("animation-timeline: scroll()");
     const fine = window.matchMedia("(pointer: fine)").matches;
-    const layers = Array.from(el.querySelectorAll<HTMLElement>("[data-depth]"));
-    const fade = el.querySelector<HTMLElement>("[data-fade]");
+    if (nativeScroll && !fine) return; // nothing for JS to do: CSS owns scroll, there is no cursor
 
-    let height = el.offsetHeight || 1;
+    const nodes = Array.from(el.querySelectorAll<HTMLElement>("[data-depth]"));
+    const depth = nodes.map((n) => Number(n.dataset.depth ?? 0));
+    const pointer = nodes.map((n) => Number(n.dataset.pointer ?? 0));
+
+    let heroHeight = el.offsetHeight || 1;
     let scrollY = 0;
     let targetX = 0;
     let targetY = 0;
@@ -49,22 +49,13 @@ export function ParallaxRoot({
 
     const render = () => {
       raf = 0;
-      curX += (targetX - curX) * 0.085;
-      curY += (targetY - curY) * 0.085;
-
-      for (const layer of layers) {
-        const depth = Number(layer.dataset.depth ?? 0);
-        const pointer = Number(layer.dataset.pointer ?? 0);
-        layer.style.transform = `translate3d(${(curX * pointer).toFixed(2)}px, ${(scrollY * depth + curY * pointer).toFixed(2)}px, 0)`;
+      curX += (targetX - curX) * 0.1;
+      curY += (targetY - curY) * 0.1;
+      for (let i = 0; i < nodes.length; i++) {
+        const y = (nativeScroll ? 0 : scrollY * depth[i]) + curY * pointer[i];
+        nodes[i].style.transform = `translate3d(${(curX * pointer[i]).toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
       }
-
-      if (fade) {
-        const p = Math.min(1, scrollY / (height * 0.85));
-        fade.style.opacity = String(1 - p * 0.95);
-        fade.style.transform = `translate3d(0, ${(scrollY * 0.14).toFixed(2)}px, 0)`;
-      }
-
-      const settling = Math.abs(targetX - curX) > 0.002 || Math.abs(targetY - curY) > 0.002;
+      const settling = Math.abs(targetX - curX) > 0.003 || Math.abs(targetY - curY) > 0.003;
       if (settling && visible) raf = requestAnimationFrame(render);
     };
 
@@ -73,49 +64,52 @@ export function ParallaxRoot({
     };
 
     const onScroll = () => {
-      scrollY = Math.min(window.scrollY, height * 1.3);
+      scrollY = Math.min(window.scrollY, heroHeight * 1.3);
       schedule();
     };
-
     const onPointer = (e: PointerEvent) => {
       if (!fine || !visible) return;
-      const rect = el.getBoundingClientRect();
-      targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+      targetX = (e.clientX / window.innerWidth - 0.5) * 2;
+      targetY = (e.clientY / window.innerHeight - 0.5) * 2;
       schedule();
     };
-
     const onLeave = () => {
       targetX = 0;
       targetY = 0;
       schedule();
     };
 
-    const onResize = () => {
-      height = el.offsetHeight || 1;
-      onScroll();
-    };
+    const ro = new ResizeObserver(() => {
+      heroHeight = el.offsetHeight || 1;
+    });
+    ro.observe(el);
 
     const io = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
-        if (visible) onScroll();
+        if (visible) {
+          if (!nativeScroll) onScroll();
+          schedule();
+        }
       },
       { threshold: 0 },
     );
     io.observe(el);
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
-    el.addEventListener("pointermove", onPointer, { passive: true });
-    el.addEventListener("pointerleave", onLeave);
+    if (!nativeScroll) {
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
+    if (fine) {
+      el.addEventListener("pointermove", onPointer, { passive: true });
+      el.addEventListener("pointerleave", onLeave);
+    }
 
     return () => {
       io.disconnect();
+      ro.disconnect();
       if (raf) cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
       el.removeEventListener("pointermove", onPointer);
       el.removeEventListener("pointerleave", onLeave);
     };

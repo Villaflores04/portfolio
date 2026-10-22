@@ -1,6 +1,5 @@
 import { ArrowUpRight, Check, Github } from "lucide-react";
 import { project } from "@/data/profile";
-import { FeedbackDemo } from "./feedback-demo";
 import { ProjectGallery } from "./project-gallery";
 import { Reveal } from "./reveal";
 import { Section } from "./section";
@@ -57,7 +56,7 @@ export function Project() {
             </a>
           ) : (
             <span className="inline-flex min-h-11 items-center rounded-full border border-dashed border-line px-5 text-sm text-muted">
-              Live demo: try the working version below
+              Live demo coming soon
             </span>
           )}
         </div>
@@ -74,11 +73,7 @@ export function Project() {
         <ProjectGallery />
       </Reveal>
 
-      <Reveal className="mt-16 sm:mt-20">
-        <FeedbackDemo />
-      </Reveal>
-
-      <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
+      <div className="mt-14 grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
         <Block title="Key features">
           <ul className="space-y-3">
             {project.features.map((f) => (

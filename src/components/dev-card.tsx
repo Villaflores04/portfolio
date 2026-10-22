@@ -13,8 +13,11 @@ export function DevCard() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let raf = 0;
+    let r = el.getBoundingClientRect();
+    const measure = () => {
+      r = el.getBoundingClientRect();
+    };
     const onMove = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;
       const y = (e.clientY - r.top) / r.height - 0.5;
       if (raf) cancelAnimationFrame(raf);
@@ -26,9 +29,11 @@ export function DevCard() {
       if (raf) cancelAnimationFrame(raf);
       el.style.transform = "perspective(900px) rotateX(0) rotateY(0)";
     };
+    el.addEventListener("pointerenter", measure);
     el.addEventListener("pointermove", onMove);
     el.addEventListener("pointerleave", onLeave);
     return () => {
+      el.removeEventListener("pointerenter", measure);
       el.removeEventListener("pointermove", onMove);
       el.removeEventListener("pointerleave", onLeave);
       if (raf) cancelAnimationFrame(raf);
@@ -38,7 +43,7 @@ export function DevCard() {
   return (
     <div
       ref={ref}
-      className="glass w-full rounded-3xl p-1 transition-transform duration-300 ease-out will-change-transform"
+      className="glass w-full rounded-3xl p-1 transition-transform duration-300 ease-out"
     >
       <div className="rounded-[1.35rem] bg-surface/70 p-4 sm:p-5">
         <div className="flex items-center justify-between">
@@ -69,12 +74,12 @@ export function DevCard() {
           </code>
         </pre>
 
-        <div className="mt-4 grid grid-cols-4 gap-2" aria-hidden>
-          {["🤩", "😊", "😐", "😢"].map((g) => (
-            <span key={g} className="grid h-11 place-items-center rounded-xl border border-line bg-surface-2/80 text-xl">
-              {g}
-            </span>
-          ))}
+        <div className="mt-4 flex items-center justify-between rounded-xl border border-line bg-surface-2/80 px-3.5 py-2.5 text-xs">
+          <span className="flex items-center gap-2 text-muted">
+            <span className="h-2 w-2 rounded-full bg-emerald-400" aria-hidden />
+            Available for work
+          </span>
+          <span className="font-mono text-muted">BSIT · 4B</span>
         </div>
       </div>
     </div>

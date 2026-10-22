@@ -7,7 +7,7 @@ export function Marquee() {
       {headlineSkills.map((s) => (
         <li
           key={s}
-          className="flex items-center gap-3 whitespace-nowrap rounded-full border border-line bg-surface/70 px-5 py-2.5 text-sm text-muted backdrop-blur"
+          className="flex items-center gap-3 whitespace-nowrap rounded-full border border-line bg-surface px-5 py-2.5 text-sm text-muted"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-accent to-accent-2" aria-hidden />
           {s}

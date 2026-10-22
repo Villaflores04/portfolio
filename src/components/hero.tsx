@@ -16,8 +16,9 @@ export function Hero() {
         <HeroLandscape />
 
         <div
-          data-fade
-          className="relative z-10 mx-auto grid min-h-[100svh] w-full max-w-6xl grid-cols-[minmax(0,1fr)] items-center gap-10 px-5 pb-28 pt-40 sm:px-8 sm:pt-44 md:pb-32 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-8 lg:pt-24"
+          data-depth="0.12"
+          style={{ "--depth": 0.12 } as React.CSSProperties}
+          className="plx plx-fade relative z-10 mx-auto grid min-h-[100svh] w-full max-w-6xl grid-cols-[minmax(0,1fr)] items-center gap-10 px-5 pb-28 pt-40 sm:px-8 sm:pt-44 md:pb-32 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-8 lg:pt-24"
         >
           <div className="min-w-0">
             <p

@@ -21,25 +21,33 @@ export function Navbar() {
   const toggle = useRef<HTMLButtonElement>(null);
   const firstLink = useRef<HTMLAnchorElement>(null);
 
-  // scroll progress + condensed state
+  // condensed state (state only changes when the threshold is crossed, so scrolling does not re-render)
+  // + scroll progress: CSS scroll timeline where supported, otherwise a cached-height JS fallback
   useEffect(() => {
+    const native = typeof CSS !== "undefined" && CSS.supports("animation-timeline: scroll()");
     let raf = 0;
+    let max = 1;
+    const measure = () => {
+      max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    };
     const update = () => {
       raf = 0;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const p = max > 0 ? window.scrollY / max : 0;
-      if (bar.current) bar.current.style.transform = `scaleX(${Math.min(1, Math.max(0, p)).toFixed(4)})`;
-      setScrolled(window.scrollY > 24);
+      if (!native && bar.current) {
+        bar.current.style.transform = `scaleX(${Math.min(1, window.scrollY / max).toFixed(4)})`;
+      }
     };
     const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
+      setScrolled(window.scrollY > 24);
+      if (!native && !raf) raf = requestAnimationFrame(update);
     };
-    update();
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
+    measure();
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
     return () => {
+      ro.disconnect();
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
@@ -91,7 +99,7 @@ export function Navbar() {
         <nav
           aria-label="Primary"
           className={`mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full pl-2.5 pr-2 transition-all duration-300 sm:h-[3.75rem] sm:pl-3 ${
-            scrolled || open ? "glass" : "border border-transparent"
+            scrolled || open ? "glass glass-blur" : "border border-transparent"
           }`}
         >
           <a href="#top" className="flex items-center gap-2.5 rounded-full pr-3 font-semibold tracking-tight" onClick={() => setOpen(false)}>
@@ -143,7 +151,7 @@ export function Navbar() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px]" aria-hidden>
           <div
             ref={bar}
-            className="h-full origin-left bg-gradient-to-r from-accent via-accent-2 to-accent-3"
+            className="progress-bar h-full origin-left bg-gradient-to-r from-accent via-accent-2 to-accent-3"
             style={{ transform: "scaleX(0)" }}
           />
         </div>
@@ -153,7 +161,7 @@ export function Navbar() {
       <div
         id="mobile-menu"
         hidden={!open}
-        className="fixed inset-0 z-40 bg-bg/90 px-6 pb-[max(2rem,env(safe-area-inset-bottom))] pt-24 backdrop-blur-2xl md:hidden"
+        className="glass-blur fixed inset-0 z-40 bg-bg/92 px-6 pb-[max(2rem,env(safe-area-inset-bottom))] pt-24 md:hidden"
       >
         <ul className="flex flex-col">
           {links.map((l, i) => (

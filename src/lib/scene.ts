@@ -77,16 +77,12 @@ export function pines(seed: number, base: number, count: number, minH: number, m
   return d;
 }
 
-export type Star = { x: number; y: number; size: number; delay: number; duration: number; bright: boolean };
-
-export function stars(seed: number, count: number): Star[] {
+/**
+ * Stars as box-shadow lists. One tiny element paints dozens of dots, so the whole sky costs
+ * three compositor layers instead of one element (and one animation) per star.
+ * x uses vw and y uses svh so the field scales with the viewport without any JS.
+ */
+export function starShadows(seed: number, count: number, color: string, ySpan = 150): string {
   const r = rng(seed);
-  return Array.from({ length: count }, () => ({
-    x: r() * 100,
-    y: r() * 100,
-    size: 1 + r() * 1.8,
-    delay: r() * 6,
-    duration: 2.5 + r() * 4,
-    bright: r() > 0.82,
-  }));
+  return Array.from({ length: count }, () => `${f(r() * 100)}vw ${f(r() * ySpan)}svh 0 0 ${color}`).join(",");
 }

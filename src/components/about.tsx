@@ -25,8 +25,8 @@ export function About() {
             databases behind it.
           </p>
           <p>
-            My featured project, DAET Pulse, is a real tourism feedback system for the Municipality of Daet — built around
-            emoji ratings so anyone can share how a place felt in one tap.
+            My featured project, DAET Pulse, is a tourism feedback system built for the Municipality of Daet, with a public
+            visitor side and a protected municipal desk.
           </p>
         </Reveal>
 

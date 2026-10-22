@@ -18,7 +18,7 @@ export function Section({
 }) {
   return (
     <section id={id} className="relative mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-24 lg:py-32">
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      <div className="pointer-events-none absolute inset-0 overflow-clip" aria-hidden>
         <ParallaxWord>{index}</ParallaxWord>
       </div>
       <Reveal className="relative">
