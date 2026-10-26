@@ -1,4 +1,3 @@
-import { ParallaxWord } from "./parallax/parallax-word";
 import { Reveal } from "./reveal";
 
 export function Section({
@@ -19,7 +18,9 @@ export function Section({
   return (
     <section id={id} className="relative mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-0 overflow-clip" aria-hidden>
-        <ParallaxWord>{index}</ParallaxWord>
+        <span aria-hidden className="ghost-word absolute right-0 top-8 select-none sm:top-4">
+          {index}
+        </span>
       </div>
       <Reveal className="relative">
         <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-accent">

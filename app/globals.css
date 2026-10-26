@@ -45,12 +45,9 @@
   --cel-1: #f8f9ff;
   --cel-2: #bfc9ff;
   --cel-glow: rgba(140, 150, 255, 0.5);
-  --cloud: rgba(120, 90, 200, 0.22);
-  --mist: rgba(110, 90, 210, 0.22);
   --blob-a: rgba(99, 102, 241, 0.3);
   --blob-b: rgba(6, 182, 212, 0.2);
   --blob-c: rgba(217, 70, 239, 0.2);
-  --grain-o: 0.07;
   --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 22px 44px -28px rgba(0, 0, 0, 0.8);
 }
 
@@ -106,7 +103,7 @@ body {
   transform: translateY(-4px);
 }
 
-/* Translucent but NOT blurred: backdrop-filter over a moving parallax scene forces a re-blur every frame.
+/* Translucent but NOT blurred: backdrop-filter over scrolling content is re-blurred every frame, so it is kept to large screens.
    .glass-blur opts in, and is used only on the fixed nav and the mobile menu. */
 .glass {
   background: color-mix(in oklab, var(--surface) 78%, transparent);
@@ -199,144 +196,18 @@ body {
   border-color: var(--accent);
 }
 
-/* ───────────── hero landscape ───────────── */
-.sky {
+/* ───────────── hero background (static: painted once, never animated) ───────────── */
+.hero-bg {
   background:
-    radial-gradient(70% 45% at 50% 88%, var(--horizon), transparent 70%),
-    linear-gradient(180deg, var(--sky-1) 0%, var(--sky-2) 55%, var(--sky-3) 100%);
+    radial-gradient(60% 50% at 78% 12%, color-mix(in oklab, var(--accent) 24%, transparent), transparent 70%),
+    radial-gradient(50% 45% at 8% 38%, color-mix(in oklab, var(--accent-2) 14%, transparent), transparent 70%),
+    radial-gradient(45% 40% at 55% 100%, color-mix(in oklab, var(--accent-3) 12%, transparent), transparent 70%);
 }
-
-.star-group {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: transparent;
-  animation: twinkle 5s ease-in-out infinite;
-}
-.sg-a {
-  animation-duration: 6s;
-}
-.sg-b {
-  width: 3px;
-  height: 3px;
-  animation-duration: 4s;
-  animation-delay: -1.5s;
-}
-.sg-c {
-  width: 3px;
-  height: 3px;
-  animation-duration: 3s;
-  animation-delay: -0.8s;
-  filter: drop-shadow(0 0 3px rgba(170, 190, 255, 0.9));
-}
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.celestial {
-  width: clamp(54px, 11vw, 132px);
-  aspect-ratio: 1;
-}
-.celestial-body {
-  position: absolute;
-  inset: 0;
-  border-radius: 999px;
-  background: radial-gradient(circle at 34% 30%, var(--cel-1), var(--cel-2) 78%);
-  box-shadow: 0 0 40px 6px var(--cel-glow);
-}
-.celestial-body {
-  /* faint maria on the moon */
-  background:
-    radial-gradient(circle at 62% 62%, rgba(120, 130, 200, 0.35) 0 11%, transparent 12%),
-    radial-gradient(circle at 36% 68%, rgba(120, 130, 200, 0.28) 0 7%, transparent 8%),
-    radial-gradient(circle at 70% 30%, rgba(120, 130, 200, 0.25) 0 6%, transparent 7%),
-    radial-gradient(circle at 34% 30%, var(--cel-1), var(--cel-2) 82%);
-}
-.celestial-glow {
-  position: absolute;
-  inset: -90%;
-  border-radius: 999px;
-  background: radial-gradient(circle, var(--cel-glow), transparent 62%);
-  animation: breathe 7s ease-in-out infinite;
-}
-@keyframes breathe {
-  0%,
-  100% {
-    opacity: 0.7;
-    transform: scale(0.96);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.06);
-  }
-}
-
-.cloud {
-  position: absolute;
-  height: clamp(70px, 11vw, 150px);
-  border-radius: 50%;
-  background: radial-gradient(closest-side, var(--cloud), transparent);
-  animation: drift 46s ease-in-out infinite alternate;
-}
-.cloud-a {
-  left: 2%;
-  top: 24%;
-  width: clamp(240px, 44vw, 620px);
-}
-.cloud-b {
-  right: 0;
-  top: 38%;
-  width: clamp(200px, 36vw, 500px);
-  animation-duration: 60s;
-  animation-direction: alternate-reverse;
-  opacity: 0.8;
-}
-@keyframes drift {
-  from {
-    translate: -4vw 0;
-  }
-  to {
-    translate: 5vw 0;
-  }
-}
-
-.mist {
-  position: absolute;
-  inset: auto -10% 0;
-  height: 100%;
-  background: radial-gradient(60% 70% at 50% 100%, var(--mist), transparent 75%);
-  animation: drift 38s ease-in-out infinite alternate;
-}
-
-/* ───────────── page-wide depth ───────────── */
-.ambient {
-  position: absolute;
-  border-radius: 50%;
-}
-.ambient-a {
-  background: radial-gradient(circle, var(--blob-a), transparent 66%);
-  --shift: -480px;
-}
-.ambient-b {
-  background: radial-gradient(circle, var(--blob-b), transparent 66%);
-  --shift: -900px;
-}
-.ambient-c {
-  background: radial-gradient(circle, var(--blob-c), transparent 66%);
-  --shift: -1400px;
-}
-.grain {
-  opacity: var(--grain-o);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+.hero-grid {
+  background-image: radial-gradient(color-mix(in oklab, var(--fg) 14%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, #000 0%, transparent 80%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 80%);
 }
 
 .ghost-word {
@@ -348,54 +219,11 @@ body {
   -webkit-text-stroke: 1.5px color-mix(in oklab, var(--accent) 20%, transparent);
 }
 
-/* ───────────── scroll-driven parallax (compositor-only) ─────────────
-   Where supported, scroll motion never touches the main thread. JS handles only the cursor, via `transform`,
-   while these animations use the separate `translate` property, so the two compose without fighting. */
+/* ───────────── scroll progress bar (compositor-driven where supported) ───────────── */
 @supports (animation-timeline: scroll()) {
-  .plx {
-    animation: plx linear both;
-    animation-timeline: scroll(root block);
-    animation-range: 0 100vh;
-  }
-  .plx-fade {
-    animation-name: plx-fade;
-  }
-  .ambient {
-    animation: ambient linear both;
-    animation-timeline: scroll(root block);
-  }
-  .ghost-word {
-    animation: ghost linear both;
-    animation-timeline: view(block);
-    animation-range: cover;
-  }
   .progress-bar {
     animation: progress linear both;
     animation-timeline: scroll(root block);
-  }
-}
-@keyframes plx {
-  to {
-    translate: 0 calc(var(--depth, 0) * 100vh);
-  }
-}
-@keyframes plx-fade {
-  to {
-    translate: 0 calc(var(--depth, 0) * 100vh);
-    opacity: 0.05;
-  }
-}
-@keyframes ambient {
-  to {
-    translate: 0 var(--shift, 0px);
-  }
-}
-@keyframes ghost {
-  from {
-    translate: 0 90px;
-  }
-  to {
-    translate: 0 -90px;
   }
 }
 @keyframes progress {
@@ -496,40 +324,6 @@ body {
   }
 }
 
-/* ───────────── lite mode ─────────────
-   Added on <html> by <PerfGuard/> when the device drops frames (or Save-Data is on): static scene, no
-   ambient fields, grain, twinkle, drift or marquee. The page looks the same, it just stops moving. */
-@media (max-width: 767px) {
-  .grain {
-    display: none;
-  }
-}
-.lite .plx,
-.lite .ambient,
-.lite .ghost-word,
-.lite .star-group,
-.lite .cloud,
-.lite .mist,
-.lite .celestial-glow,
-.lite .marquee {
-  animation: none !important;
-}
-.lite .plx {
-  translate: none;
-  transform: none !important;
-}
-.lite .grain,
-.lite .ambient {
-  display: none;
-}
-.lite .glass-blur {
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-.lite .marquee-wrap {
-  overflow-x: auto;
-}
-
 /* ───────────── reduced motion ───────────── */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -542,14 +336,7 @@ body {
     animation: none;
     transition: none;
   }
-  .plx,
-  .ambient,
-  .ghost-word,
   .progress-bar,
-  .star-group,
-  .cloud,
-  .mist,
-  .celestial-glow,
   .marquee,
   .caret,
   .pop {

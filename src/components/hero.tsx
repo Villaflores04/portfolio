@@ -1,8 +1,6 @@
 import { ArrowDown, ArrowUpRight, Github, Mail } from "lucide-react";
 import { profile } from "@/data/profile";
 import { DevCard } from "./dev-card";
-import { HeroLandscape } from "./parallax/hero-landscape";
-import { ParallaxRoot } from "./parallax/parallax-root";
 
 const stats = [
   { value: "9", label: "Skills" },
@@ -14,13 +12,12 @@ const delay = (s: number) => ({ ["--d" as string]: `${s}s` });
 
 export function Hero() {
   return (
-    <ParallaxRoot id="top" label="Introduction" className="relative isolate min-h-[100svh] overflow-hidden">
-      <HeroLandscape />
+    <section id="top" aria-label="Introduction" className="relative isolate min-h-[100svh] overflow-hidden">
+      <div className="hero-bg pointer-events-none absolute inset-0 -z-10" aria-hidden />
+      <div className="hero-grid pointer-events-none absolute inset-0 -z-10" aria-hidden />
 
       <div
-        data-depth="0.12"
-        style={{ "--depth": 0.12 } as React.CSSProperties}
-        className="plx plx-fade relative z-10 mx-auto grid min-h-[100svh] w-full max-w-6xl grid-cols-[minmax(0,1fr)] content-start gap-9 px-5 pb-20 pt-[6.5rem] sm:px-8 sm:pt-36 md:pb-28 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:content-center lg:items-center lg:gap-8 lg:pt-24"
+        className="relative z-10 mx-auto grid min-h-[100svh] w-full max-w-6xl grid-cols-[minmax(0,1fr)] content-start gap-9 px-5 pb-20 pt-[6.5rem] sm:px-8 sm:pt-36 md:pb-28 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:content-center lg:items-center lg:gap-8 lg:pt-24"
       >
         {/* text column */}
         <div className="min-w-0">
@@ -102,6 +99,6 @@ export function Hero() {
       >
         <ArrowDown size={18} aria-hidden className="animate-bounce motion-reduce:animate-none" />
       </a>
-    </ParallaxRoot>
+    </section>
   );
 }

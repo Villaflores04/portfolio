@@ -7,9 +7,7 @@ import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { Marquee } from "@/components/marquee";
 import { Navbar } from "@/components/navbar";
-import { AmbientBackground } from "@/components/parallax/ambient-background";
-import { PerfGuard } from "@/components/parallax/perf-guard";
-import { Spotlight } from "@/components/parallax/spotlight";
+import { Spotlight } from "@/components/spotlight";
 import { Project } from "@/components/project";
 import { Skills } from "@/components/skills";
 import { profile } from "@/data/profile";
@@ -26,8 +24,6 @@ const jsonLd = {
 export default function Home() {
   return (
     <>
-      <AmbientBackground />
-      <PerfGuard />
       <Spotlight />
       <Navbar />
       <main id="main">
