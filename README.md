@@ -10,7 +10,7 @@ A premium, responsive developer portfolio built with **Next.js 15, React 19, Typ
 
 - Presents my profile, skills, education and featured project (DAET Pulse) as a fast single page.
 - Opens with a clean hero: headline, call-to-action buttons, stats and a developer card, over a static gradient background.
-- **Dark theme only**: a night scene with moon, stars and indigo peaks.
+- **Dark theme only**, with a static gradient hero.
 - A **certificates gallery** (8 webinar and event certificates in `public/certificates`) with a full-size viewer: Esc to close, arrow keys to browse.
 - Shows **DAET Pulse screenshots** in a tabbed browser-and-phone gallery, plus its features, architecture, API endpoints, challenges and next steps.
 - Responsive from 320px phones to wide desktops: floating pill navigation, full-screen mobile menu, active-section highlighting, scroll-progress bar and back-to-top.
