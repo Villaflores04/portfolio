@@ -13,7 +13,7 @@ export function Contact() {
   return (
     <Section
       id="contact"
-      index="05"
+      index="06"
       eyebrow="Contact"
       title="Let's build something together."
       intro="I'm looking for opportunities to grow as a full-stack developer. Send me a message — I read everything."

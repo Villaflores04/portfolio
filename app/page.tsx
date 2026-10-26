@@ -1,5 +1,6 @@
 import { About } from "@/components/about";
 import { BackToTop } from "@/components/back-to-top";
+import { Certificates } from "@/components/certificates";
 import { Contact } from "@/components/contact";
 import { Education } from "@/components/education";
 import { Footer } from "@/components/footer";
@@ -36,6 +37,7 @@ export default function Home() {
         <Skills />
         <Project />
         <Education />
+        <Certificates />
         <Contact />
       </main>
       <Footer />

@@ -3,13 +3,13 @@
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { profile } from "@/data/profile";
-import { ThemeToggle } from "./theme-toggle";
 
 const links = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "project", label: "Project" },
   { id: "education", label: "Education" },
+  { id: "certificates", label: "Certificates" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -132,7 +132,6 @@ export function Navbar() {
             <a href={`mailto:${profile.email}`} className="btn btn-primary hidden !min-h-10 !px-4 text-[13px] lg:inline-flex">
               Hire me <ArrowUpRight size={14} aria-hidden />
             </a>
-            <ThemeToggle />
             <button
               ref={toggle}
               type="button"

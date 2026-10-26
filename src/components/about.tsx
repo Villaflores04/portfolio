@@ -15,6 +15,15 @@ export function About() {
     <Section id="about" index="01" eyebrow="About" title="Building things people actually use.">
       <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-5 lg:gap-14">
         <Reveal className="space-y-5 text-base leading-relaxed text-muted sm:text-lg lg:col-span-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/profile.jpg"
+            alt="Portrait of Paul Vincent N. Villaflores"
+            width={112}
+            height={112}
+            loading="lazy"
+            className="h-28 w-28 rounded-3xl object-cover object-top ring-2 ring-accent/40 shadow-xl"
+          />
           <p>
             I&apos;m <strong className="font-semibold text-fg">{profile.name}</strong>, a fourth-year BS Information
             Technology student at Our Lady of Lourdes College Foundation, focused on full-stack web development.

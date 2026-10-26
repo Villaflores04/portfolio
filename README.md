@@ -10,7 +10,8 @@ A premium, responsive developer portfolio built with **Next.js 15, React 19, Typ
 
 - Presents my profile, skills, education and featured project (DAET Pulse) as a fast single page.
 - Opens with a **multi-layer parallax landscape** (sky with stars, sun/moon and clouds; three mountain ranges; mist and pines; foreground ridge). Layers move at different rates on scroll and respond to the cursor on desktop.
-- **Light and dark mode** with different scenes: sun and lavender peaks by day, moon, stars and indigo peaks by night. Follows the OS until you choose, then remembers your choice, with no flash on load.
+- **Dark theme only**: a night scene with moon, stars and indigo peaks.
+- A **certificates gallery** (8 webinar and event certificates in `public/certificates`) with a full-size viewer: Esc to close, arrow keys to browse.
 - Shows **DAET Pulse screenshots** in a tabbed browser-and-phone gallery, plus its features, architecture, API endpoints, challenges and next steps.
 - Responsive from 320px phones to wide desktops: floating pill navigation, full-screen mobile menu, active-section highlighting, scroll-progress bar and back-to-top.
 
@@ -62,7 +63,7 @@ Measured in headless Chromium (software rendering, so absolute numbers are pessi
 | Landscape | `src/lib/scene.ts` generates mountains, hills, pines and stars from fixed seeds, so server and client always render identically. |
 | Parallax | Each layer carries `--depth` (scroll factor) and `data-pointer` (cursor offset). `ParallaxRoot` handles the cursor and the fallback; CSS handles scroll. |
 | Theming | CSS variables on `:root` / `.dark` drive every colour, including the sky, mountains, sun/moon, clouds and mist. |
-| Micro-interactions | Cursor spotlight on cards, 3D-tilt developer card, shine buttons, scroll reveals, animated theme toggle. |
+| Micro-interactions | Cursor spotlight on cards, 3D-tilt developer card, shine buttons, scroll reveals. |
 
 ## Featured project: DAET Pulse
 
@@ -89,7 +90,7 @@ tests/                    Vitest unit tests
 
 - Security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`); no user input, forms or secrets.
 - Accessible: semantic landmarks, skip link, keyboard-navigable tab gallery (arrow keys, Home/End), focus handling and scroll-lock in the mobile menu, 44px minimum touch targets, reduced-motion support.
-- Checked in headless Chromium at 375, 768, 1024 and 1440px in both themes: no horizontal overflow and no console errors.
+- Checked in headless Chromium at 375, 768, 1024 and 1440px: no horizontal overflow and no console errors.
 - CI runs typecheck, tests and build on every push and pull request.
 
 ## Limitations

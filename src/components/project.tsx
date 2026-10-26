@@ -5,8 +5,8 @@ import { Reveal } from "./reveal";
 import { Section } from "./section";
 
 const methodStyle: Record<string, string> = {
-  GET: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",
-  POST: "bg-indigo-500/15 text-indigo-600 dark:text-indigo-300",
+  GET: "bg-emerald-500/15 text-emerald-400",
+  POST: "bg-indigo-500/15 text-indigo-300",
 };
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {

@@ -105,3 +105,73 @@ export const project = {
     "End-to-end tests against a staging Supabase project",
   ],
 };
+
+export type Certificate = {
+  file: string;
+  title: string;
+  issuer: string;
+  date: string;
+  kind: "Webinar" | "Event";
+  portrait?: boolean;
+};
+
+/** Images live in public/certificates. Newest first. */
+export const certificates: Certificate[] = [
+  {
+    file: "out-of-the-box",
+    title: "Mapapakain ka ba ng Passion na yan?: The Realities of a 3rd World Creative",
+    issuer: "OUT-OF-THE-BOX: Cuadro Creative Camp · WVSU CICT",
+    date: "October 3, 2026",
+    kind: "Webinar",
+    portrait: true,
+  },
+  {
+    file: "participation",
+    title: "From IS Graduate to Industry Professional: Career, Portfolio & Emerging Roles",
+    issuer: "West Visayas State University · College of ICT",
+    date: "October 3, 2026",
+    kind: "Webinar",
+  },
+  {
+    file: "level-up",
+    title: "LEVEL UP — Where Risk Meets Data: Cybersecurity for Information Systems Professionals",
+    issuer: "West Visayas State University",
+    date: "September 26, 2026",
+    kind: "Webinar",
+  },
+  {
+    file: "creative-career",
+    title: "From Student to Professional: The Creative Career Starter Pack",
+    issuer: "West Visayas State University · College of ICT",
+    date: "September 26, 2026",
+    kind: "Webinar",
+  },
+  {
+    file: "create-to-earn",
+    title: "Create to Earn! Freelance Work, Business Mindset and Creative Career Growth",
+    issuer: "Webinar series · Division of EMC",
+    date: "September 25, 2026",
+    kind: "Webinar",
+  },
+  {
+    file: "dict-startup",
+    title: "Startup Awareness Webinar — Spot the Gap, Build the System",
+    issuer: "DICT Regional Office VIII · ICT Industry Development Bureau",
+    date: "September 2, 2026",
+    kind: "Webinar",
+  },
+  {
+    file: "appearance-3",
+    title: "Opening Ceremonies, 2026 Regional Science and Technology Week in Bicol",
+    issuer: "DOST Regional Office No. 5",
+    date: "August 19, 2026",
+    kind: "Event",
+  },
+  {
+    file: "appearance-2",
+    title: "Viewing of Exhibits, 2026 Regional Science and Technology Week in Bicol",
+    issuer: "DOST Regional Office No. 5",
+    date: "August 19, 2026",
+    kind: "Event",
+  },
+];

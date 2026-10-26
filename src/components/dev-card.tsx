@@ -46,13 +46,19 @@ export function DevCard() {
       className="glass w-full rounded-3xl p-1 transition-transform duration-300 ease-out"
     >
       <div className="rounded-[1.35rem] bg-surface/70 p-4 sm:p-5">
-        <div className="flex items-center justify-between">
-          <div className="flex gap-1.5" aria-hidden>
-            <span className="h-3 w-3 rounded-full bg-red-400/80" />
-            <span className="h-3 w-3 rounded-full bg-amber-400/80" />
-            <span className="h-3 w-3 rounded-full bg-emerald-400/80" />
+        <div className="flex items-center gap-3.5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/profile.jpg"
+            alt="Portrait of Paul Vincent N. Villaflores"
+            width={64}
+            height={64}
+            className="h-16 w-16 shrink-0 rounded-2xl object-cover object-top ring-2 ring-accent/40"
+          />
+          <div className="min-w-0">
+            <p className="truncate text-[15px] font-semibold leading-tight">Paul Vincent N. Villaflores</p>
+            <p className="mt-0.5 font-mono text-[11px] text-muted">paul.config.ts</p>
           </div>
-          <span className="font-mono text-[11px] text-muted">paul.config.ts</span>
         </div>
 
         <pre
