@@ -175,3 +175,36 @@ export const certificates: Certificate[] = [
     kind: "Event",
   },
 ];
+
+/** Design Thinking write-up for DAET Pulse. Edit the `did` paragraphs to match your real process. */
+export const designThinking = {
+  intro:
+    "I used the five stages of design thinking to turn a simple question — how can visitors tell Daet what their trip was like, and how can the municipality actually use it? — into DAET Pulse.",
+  stages: [
+    {
+      name: "Empathize",
+      what: "Understanding the people the system is for before deciding what to build.",
+      did: "I looked at the two groups who would use it: visitors, who are usually on a phone, in a hurry and unwilling to create an account, and municipal staff, who need feedback they can trust and sort through. I also looked at how feedback is normally gathered, such as paper forms and long online surveys, and why people skip them.",
+    },
+    {
+      name: "Define",
+      what: "Turning what was learned into a clear problem to solve.",
+      did: "I framed the problem as: visitors need a way to share how their visit felt in a few seconds, and the municipality needs that feedback in one organised place. From that I set the rules for the design: no account for visitors, one tap to rate, optional notes and photos, and a protected desk for officers.",
+    },
+    {
+      name: "Ideate",
+      what: "Exploring many possible solutions before choosing one.",
+      did: "I compared long surveys, star ratings and emoji faces, and chose four faces (Wow, Happy, Okay, Sad) because they are quick, work across languages and are easy to total. I then planned the features around them: places to rate, an overall-visit option, reactions and replies, and a desk with moderation and sentiment insights.",
+    },
+    {
+      name: "Prototype",
+      what: "Building a working version that people can try.",
+      did: "I built it with Next.js, React and TypeScript, with Supabase for the database and photo storage. I started with the visitor flow on mobile (landing, feedback form, places), then added the municipal desk and the API routes behind both. Details such as retry-safe submissions and clear loading and error states came from building it.",
+    },
+    {
+      name: "Test",
+      what: "Trying the prototype, finding what breaks and improving it.",
+      did: "I used the live site, fixed the problems I found, and wrote them up as the challenges above: failed loads that looked like empty data, photo uploads failing silently, and overall feedback that belonged to no place. Next I want to add end-to-end tests and gather feedback from real visitors and municipal staff.",
+    },
+  ],
+};

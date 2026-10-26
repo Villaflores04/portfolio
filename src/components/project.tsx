@@ -1,5 +1,6 @@
 import { ArrowUpRight, Check, Github } from "lucide-react";
 import { project } from "@/data/profile";
+import { DesignThinking } from "./design-thinking";
 import { ProjectGallery } from "./project-gallery";
 import { Reveal } from "./reveal";
 import { Section } from "./section";
@@ -73,7 +74,11 @@ export function Project() {
         <ProjectGallery />
       </Reveal>
 
-      <div className="mt-14 grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
+      <div className="mt-16">
+        <DesignThinking />
+      </div>
+
+      <div className="mt-16 grid grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-2">
         <Block title="Key features">
           <ul className="space-y-3">
             {project.features.map((f) => (
